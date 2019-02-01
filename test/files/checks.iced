@@ -29,7 +29,7 @@ exports.strict_check_duplicate_keys_1 = (T,cb) ->
   v1 = purepack.pack 1
   v2 = purepack.pack 2
   dict = Buffer.concat [
-    new Buffer([ 0x82 ] ), # fixed map with 2 elements
+    Buffer.from([ 0x82 ] ), # fixed map with 2 elements
     key  # "key"
     v1   # 1
     key  # "key"
@@ -53,7 +53,7 @@ exports.strict_check_understuffed = (T,cb) ->
     # Maps
     {
       buf : Buffer.concat([
-        new Buffer([0xde, 0x00, 0x01 ]), # A 16-bit-sized buffer, with just 1 item
+         Buffer.from([0xde, 0x00, 0x01 ]), # A 16-bit-sized buffer, with just 1 item
         purepack.pack("key"),
         purepack.pack(2)
       ]),
@@ -62,7 +62,7 @@ exports.strict_check_understuffed = (T,cb) ->
     },
     {
       buf : Buffer.concat([
-        new Buffer([0xdf, 0x00, 0x00, 0x00, 0x01 ]), # A 16-bit-sized buffer, with just 1 item
+        Buffer.from([0xdf, 0x00, 0x00, 0x00, 0x01 ]), # A 16-bit-sized buffer, with just 1 item
         purepack.pack("key"),
         purepack.pack(2)
       ]),
@@ -72,85 +72,85 @@ exports.strict_check_understuffed = (T,cb) ->
 
     # arrays
     {
-      buf : new Buffer([0xdc, 0x00, 0x01, 0x2 ]) # A 16-bit-sized buffer, with just 1 item (the number 2)
+      buf : Buffer.from([0xdc, 0x00, 0x01, 0x2 ]) # A 16-bit-sized buffer, with just 1 item (the number 2)
       wanted : 2, got : 4,
       name : "want fix array, got array16"
     },
     {
-      buf : new Buffer([0xdd, 0x00, 0x00, 0x00, 0x01, 0x02 ]) # A 16-bit-sized buffer, with just 1 item
+      buf : Buffer.from([0xdd, 0x00, 0x00, 0x00, 0x01, 0x02 ]) # A 16-bit-sized buffer, with just 1 item
       wanted : 2, got : 6,
       name : "want fix array, got array32"
     },
 
     # strings
     {
-      buf : new Buffer([0xd9, 0x04, 0x61, 0x62, 0x63, 0x64 ]), # the 8-bit fixed case
+      buf : Buffer.from([0xd9, 0x04, 0x61, 0x62, 0x63, 0x64 ]), # the 8-bit fixed case
       wanted : 5, got : 6,
       name : "want fix str, got str8"
     },
     {
-      buf : new Buffer([0xda, 0x0, 0x04, 0x61, 0x62, 0x63, 0x64 ]), # the 16-bit fixed case
+      buf : Buffer.from([0xda, 0x0, 0x04, 0x61, 0x62, 0x63, 0x64 ]), # the 16-bit fixed case
       wanted : 5, got : 7,
       name : "want fix str, got str16"
     },
     {
-      buf : new Buffer([0xdb, 0x0, 0x0, 0x0, 0x04, 0x61, 0x62, 0x63, 0x64 ]), # the 32-bit fixed case
+      buf : Buffer.from([0xdb, 0x0, 0x0, 0x0, 0x04, 0x61, 0x62, 0x63, 0x64 ]), # the 32-bit fixed case
       wanted : 5, got : 9,
       name : "want fix str, got str32"
     }
 
     # uints
     {
-      buf : new Buffer([0xcc, 0x0d ]), # the 8-bit fixed case
+      buf : Buffer.from([0xcc, 0x0d ]), # the 8-bit fixed case
       wanted : 1, got : 2,
       name : "want fix int, got uint8"
     },
     {
-      buf : new Buffer([ 0xcd, 0x00, 0x0d ]), # the 16-bit fixed case
+      buf : Buffer.from([ 0xcd, 0x00, 0x0d ]), # the 16-bit fixed case
       wanted : 1, got : 3,
       name : "want fix int, got uint16"
     },
     {
-      buf : new Buffer([ 0xce, 0x00, 0x00, 0x00, 0x0d ]), # the 32-bit fixed case
+      buf : Buffer.from([ 0xce, 0x00, 0x00, 0x00, 0x0d ]), # the 32-bit fixed case
       wanted : 1, got : 5,
       name : "want fix int, got uint32"
     },
     {
-      buf : new Buffer([ 0xce, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0d ]), # the 64-bit fixed case
+      buf : Buffer.from([ 0xce, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0d ]), # the 64-bit fixed case
       wanted : 1, got : 9,
       name : "want fix int, got uint64"
     },
 
     # binary
     {
-      buf : new Buffer([0xc5, 0x00, 0x04, 0xff, 0xfe, 0x50, 0x55 ]),
+      buf : Buffer.from([0xc5, 0x00, 0x04, 0xff, 0xfe, 0x50, 0x55 ]),
       wanted : 6, got : 7,
       name : "want bin8, got bin16"
     },
     {
-      buf : new Buffer([0xc6, 0x00, 0x00, 0x00, 0x04, 0xff, 0xfe, 0x50, 0x55 ]),
+      buf : Buffer.from([0xc6, 0x00, 0x00, 0x00, 0x04, 0xff, 0xfe, 0x50, 0x55 ]),
       wanted : 6, got : 9,
       name : "want bin8, got bin32"
     },
 
     # ints
     {
-      buf : new Buffer([0xd0, 0xf0 ]), # the 8-bit fixed case
+      buf : Buffer.from([0xd0, 0xf0 ]), # the 8-bit fixed case
       wanted : 1, got : 2,
       name : "want fix int, got int8"
     },
     {
-      buf : new Buffer([ 0xd1, 0xff, 0xf0 ]), # the 16-bit fixed case
+      buf : Buffer.from([ 0xd1, 0xff, 0xf0 ]), # the 16-bit fixed case
       wanted : 1, got : 3,
       name : "want fix int, got int16"
     },
     {
-      buf : new Buffer([ 0xd2, 0xff, 0xff, 0xff, 0xf0 ]), # the 32-bit fixed case
+      buf : Buffer.from([ 0xd2, 0xff, 0xff, 0xff, 0xf0 ]), # the 32-bit fixed case
       wanted : 1, got : 5,
       name : "want fix int, got int32"
     },
     {
-      buf : new Buffer([ 0xd3, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xf0 ]), # the 64-bit fixed case
+      buf : Buffer.from([ 0xd3, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xf0 ]), # the 64-bit fixed case
       wanted : 1, got : 9,
       name : "want fix int, got int64"
     },

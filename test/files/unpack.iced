@@ -82,7 +82,7 @@ exports.unpack9 = (T,cb)->
   cb()
 
 exports.corrupt1 = (T,cb) ->
-  x = new Buffer (new Uint8Array [135, 165, 101, 109, 97, 105, 108, 176, 116, 104, 101, 109, 97,
+  x = Buffer.from (new Uint8Array [135, 165, 101, 109, 97, 105, 108, 176, 116, 104, 101, 109, 97,
                       120, 64, 103, 109, 97, 105, 108, 46, 99, 111, 109, 165, 110, 111,
                       116, 101, 115, 219, 0, 77, 110, 111, 116, 32, 97, 99, 116, 105, 118,
                       101, 32, 121, 101, 116, 44, 32, 115, 116, 105, 108, 108, 32, 117, 115,
@@ -118,8 +118,8 @@ exports.floats = (T,cb) ->
 
 exports.corrupt2 = (T,cb) ->
   bufs = [
-    (new Buffer "863921940343f3ddbde3bf7c00d0faeb9e7aeb9e", "hex")
-    (new Buffer "jhljhlkjhjkhl) AND 8929=4798 AND (6655=6655", "base64")
+    (Buffer.from "863921940343f3ddbde3bf7c00d0faeb9e7aeb9e", "hex")
+    (Buffer.from "jhljhlkjhjkhl) AND 8929=4798 AND (6655=6655", "base64")
   ]
   for b,i in bufs
     err = null

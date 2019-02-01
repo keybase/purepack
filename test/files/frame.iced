@@ -9,7 +9,7 @@ random_n = (n) -> Math.floor(Math.random() * n)
 randobuf = () ->
   len = random_n(100)
   arr = new Uint8Array(random_n(256) for [0...len] )
-  new Buffer arr
+  Buffer.from arr
 
 bufeq = (T, a, b, m) ->
   T.equal a.length, b.length, "#{m} length"
