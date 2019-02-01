@@ -49,7 +49,7 @@ exports.PpBuffer = class PpBuffer
 
   #-----------------------------------------
 
-  _make_room : () -> @_push_sub_buffer new NativeBuffer @_sz
+  _make_room : () -> @_push_sub_buffer NativeBuffer.alloc @_sz
   _make_room_for_n_bytes : (n) -> @_make_room() if @_lib() < n
 
   #-----------------------------------------
@@ -104,9 +104,9 @@ exports.PpBuffer = class PpBuffer
     @_tot += n
 
   push_raw_bytes : (s) ->
-    @push_buffer( new NativeBuffer s, 'binary' )
+    @push_buffer( NativeBuffer.from s, 'binary' )
 
-  prepare_utf8 : (s) -> new NativeBuffer s, 'utf8'
+  prepare_utf8 : (s) -> NativeBuffer.from s, 'utf8'
 
   push_buffer : (b) ->
     if b.length > @_small_buf_sz

@@ -1,3 +1,7 @@
+## 1.0.5 (2019-02-01)
+
+- Migrate from (new Buffer) to Buffer.from
+
 ## 1.0.4 (2015-09-02)
 
 Features:
