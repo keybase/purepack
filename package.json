@@ -2,11 +2,11 @@
   "name": "purepack",
   "version": "1.0.5",
   "description": "A browserify, Pure JS implementation of msgpack spec v5",
-  "homepage": "https://github.com/maxtaco/purepack",
+  "homepage": "https://github.com/keybase/purepack",
   "main": "lib/main",
   "repository": {
     "type": "git",
-    "url": "https://github.com/maxtaco/purepack.git"
+    "url": "https://github.com/keybase/purepack.git"
   },
   "directories": {
     "lib": "lib"
