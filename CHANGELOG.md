@@ -1,3 +1,7 @@
+## 1.0.06 (2020-01-27)
+
+- Some simple types
+
 ## 1.0.5 (2019-02-01)
 
 - Migrate from (new Buffer) to Buffer.from
